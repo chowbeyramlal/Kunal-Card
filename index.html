@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kunal Sharma — Product Manager</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Mono:wght@300;400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0a0a0a;
+    --surface: #111111;
+    --surface2: #161616;
+    --border: #1e1e1e;
+    --accent: #c8a96e;
+    --accent-dim: rgba(200,169,110,0.08);
+    --accent-glow: rgba(200,169,110,0.15);
+    --text: #f0ede8;
+    --muted: #6b6b6b;
+    --subtle: #2a2a2a;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    min-height: 100vh;
+    background: var(--bg);
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 0 64px;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(ellipse 65% 45% at 50% 0%, rgba(200,169,110,0.05) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .container {
+    width: 100%;
+    max-width: 420px;
+    padding: 0 24px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── Hero ── */
+  .hero {
+    padding: 56px 0 36px;
+    animation: fadeUp 0.75s cubic-bezier(0.16,1,0.3,1) both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--accent);
+    opacity: 0.75;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin-bottom: 24px;
+  }
+
+  .eyebrow-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    animation: blink 2.5s ease-in-out infinite;
+    flex-shrink: 0;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0.2; }
+  }
+
+  .hero-name {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(46px, 13vw, 58px);
+    font-weight: 700;
+    line-height: 0.93;
+    letter-spacing: -0.01em;
+    color: var(--text);
+    margin-bottom: 18px;
+  }
+
+  .hero-sub {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+  }
+
+  .hero-title {
+    font-size: 11px;
+    font-weight: 300;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+  }
+
+  .hero-sep {
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: var(--border);
+    flex-shrink: 0;
+  }
+
+  .hero-company {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.03em;
+  }
+
+  /* ── Divider ── */
+  .rule {
+    height: 1px;
+    background: var(--border);
+    margin: 30px 0;
+    animation: fadeUp 0.75s 0.08s cubic-bezier(0.16,1,0.3,1) both;
+  }
+
+  /* ── Greeting ── */
+  .greeting {
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--muted);
+    line-height: 1.8;
+    margin-bottom: 30px;
+    animation: fadeUp 0.75s 0.13s cubic-bezier(0.16,1,0.3,1) both;
+  }
+
+  .greeting em {
+    color: rgba(240,237,232,0.4);
+    font-style: normal;
+  }
+
+  /* ── Contact links ── */
+  .contacts {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 0;
+    animation: fadeUp 0.75s 0.18s cubic-bezier(0.16,1,0.3,1) both;
+  }
+
+  .contact-link {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 15px 18px;
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    text-decoration: none;
+    background: var(--surface);
+    transition: border-color 0.2s, background 0.2s, transform 0.2s;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+  }
+
+  .contact-link::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--accent-dim);
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  .contact-link:hover { border-color: var(--accent); transform: translateY(-1px); }
+  .contact-link:hover::before { opacity: 1; }
+
+  .link-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    background: var(--subtle);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: background 0.2s, border-color 0.2s;
+  }
+
+  .contact-link:hover .link-icon {
+    background: var(--accent-dim);
+    border-color: var(--accent);
+  }
+
+  .link-icon svg { width: 16px; height: 16px; }
+
+  .link-text { flex: 1; min-width: 0; }
+
+  .link-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 8.5px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 3px;
+  }
+
+  .link-value {
+    font-size: 12.5px;
+    color: var(--text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: 400;
+  }
+
+  .link-arrow {
+    font-size: 18px;
+    color: var(--muted);
+    transition: color 0.2s, transform 0.2s;
+    flex-shrink: 0;
+  }
+
+  .contact-link:hover .link-arrow { color: var(--accent); transform: translateX(3px); }
+
+  /* ── Save CTA ── */
+  .save-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 17px;
+    background: var(--accent);
+    color: #0a0a0a;
+    border-radius: 14px;
+    text-decoration: none;
+    font-family: 'Playfair Display', serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    margin-top: 22px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    animation: fadeUp 0.75s 0.28s cubic-bezier(0.16,1,0.3,1) both;
+  }
+
+  .save-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(200,169,110,0.22);
+  }
+
+  .save-btn svg { width: 16px; height: 16px; }
+
+  /* ── Footer ── */
+  .footer {
+    margin-top: 44px;
+    text-align: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 8.5px;
+    letter-spacing: 0.16em;
+    color: #272727;
+    text-transform: uppercase;
+    animation: fadeUp 0.75s 0.34s cubic-bezier(0.16,1,0.3,1) both;
+  }
+
+  /* ── Modal ── */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.8);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 100;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s;
+  }
+
+  .modal-overlay.open {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .modal {
+    width: 100%;
+    max-width: 420px;
+    background: #131313;
+    border: 1px solid var(--border);
+    border-bottom: none;
+    border-radius: 22px 22px 0 0;
+    padding: 24px 24px 44px;
+    transform: translateY(100%);
+    transition: transform 0.38s cubic-bezier(0.16,1,0.3,1);
+  }
+
+  .modal-overlay.open .modal {
+    transform: translateY(0);
+  }
+
+  .modal-handle {
+    width: 32px;
+    height: 3px;
+    border-radius: 2px;
+    background: var(--subtle);
+    margin: 0 auto 26px;
+  }
+
+  /* Gold top rule on modal */
+  .modal-top-rule {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    margin: -24px -24px 26px;
+    opacity: 0.4;
+  }
+
+  .modal-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 6px;
+    letter-spacing: -0.01em;
+  }
+
+  .modal-sub {
+    font-size: 12px;
+    font-weight: 300;
+    color: var(--muted);
+    margin-bottom: 26px;
+    line-height: 1.65;
+  }
+
+  /* Fields */
+  .field { margin-bottom: 14px; }
+
+  .field-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+
+  .field label {
+    font-family: 'DM Mono', monospace;
+    font-size: 8.5px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .required-star { color: var(--accent); }
+
+  .optional-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 7.5px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #333;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 2px 6px;
+  }
+
+  .field input {
+    width: 100%;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 13px 16px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--text);
+    outline: none;
+    transition: border-color 0.2s, background 0.2s;
+    -webkit-appearance: none;
+  }
+
+  .field input::placeholder { color: #333; }
+
+  .field input:focus {
+    border-color: var(--accent);
+    background: #131313;
+  }
+
+  /* Preview */
+  .preview-wrap {
+    margin: 18px 0 4px;
+    display: none;
+  }
+
+  .preview-wrap.visible { display: block; }
+
+  .preview-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 8.5px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+
+  .preview-bubble {
+    background: rgba(200,169,110,0.06);
+    border: 1px solid rgba(200,169,110,0.18);
+    border-radius: 14px 14px 14px 4px;
+    padding: 14px 16px;
+    font-size: 12.5px;
+    font-weight: 300;
+    color: rgba(200,169,110,0.85);
+    line-height: 1.7;
+    font-style: italic;
+  }
+
+  /* Actions */
+  .modal-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+  }
+
+  .btn-cancel {
+    flex: 1;
+    padding: 14px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--muted);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s;
+  }
+
+  .btn-cancel:hover { border-color: var(--subtle); color: var(--text); }
+
+  .btn-send {
+    flex: 2;
+    padding: 14px;
+    border-radius: 12px;
+    border: none;
+    background: var(--accent);
+    color: #0a0a0a;
+    font-family: 'Playfair Display', serif;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
+    letter-spacing: 0.01em;
+  }
+
+  .btn-send:disabled {
+    opacity: 0.25;
+    cursor: not-allowed;
+    transform: none !important;
+    box-shadow: none !important;
+  }
+
+  .btn-send:not(:disabled):hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 22px rgba(200,169,110,0.25);
+  }
+
+  .btn-send svg { width: 15px; height: 15px; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="hero">
+    <div class="eyebrow">
+      <span class="eyebrow-dot"></span>
+      Digital Business Card
+    </div>
+    <div class="hero-name">Kunal<br>Sharma</div>
+    <div class="hero-sub">
+      <span class="hero-title">Product Manager</span>
+      <span class="hero-sep"></span>
+      <span class="hero-company">Jio Platforms Limited</span>
+    </div>
+  </div>
+
+  <div class="rule"></div>
+
+  <p class="greeting">
+    Hey — glad you scanned. <em>I build reward and engagement products at Jio.</em> Reach out via any channel below — always happy to connect.
+  </p>
+
+  <div class="contacts">
+
+    <div class="contact-link" onclick="openModal()">
+      <div class="link-icon">
+        <svg viewBox="0 0 24 24" fill="#25d366">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/>
+        </svg>
+      </div>
+      <div class="link-text">
+        <div class="link-label">WhatsApp — Say hi</div>
+        <div class="link-value">+91 70218 33799</div>
+      </div>
+      <span class="link-arrow">›</span>
+    </div>
+
+    <a class="contact-link" href="https://www.linkedin.com/in/kunal-sharma-pm/" target="_blank">
+      <div class="link-icon">
+        <svg viewBox="0 0 24 24" fill="#0077b5">
+          <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+        </svg>
+      </div>
+      <div class="link-text">
+        <div class="link-label">LinkedIn</div>
+        <div class="link-value">kunal-sharma-pm</div>
+      </div>
+      <span class="link-arrow">›</span>
+    </a>
+
+    <a class="contact-link" href="mailto:Kunal10.sharma@ril.com">
+      <div class="link-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="rgba(200,169,110,0.6)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+        </svg>
+      </div>
+      <div class="link-text">
+        <div class="link-label">Work Email</div>
+        <div class="link-value">Kunal10.sharma@ril.com</div>
+      </div>
+      <span class="link-arrow">›</span>
+    </a>
+
+    <a class="contact-link" href="mailto:Kunal22sh@gmail.com">
+      <div class="link-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="rgba(200,169,110,0.6)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+        </svg>
+      </div>
+      <div class="link-text">
+        <div class="link-label">Personal Email</div>
+        <div class="link-value">Kunal22sh@gmail.com</div>
+      </div>
+      <span class="link-arrow">›</span>
+    </a>
+
+  </div>
+
+  <a class="save-btn" href="data:text/vcard;charset=utf-8,BEGIN%3AVCARD%0AVERSION%3A3.0%0AFN%3AKunal%20Sharma%0ATITLE%3AProduct%20Manager%0AORG%3AJio%20Platforms%20Limited%0ATEL%3BTYPE%3DCELL%3A%2B917021833799%0AEMAIL%3BTYPE%3DWORK%3AKunal10.sharma%40ril.com%0AEMAIL%3BTYPE%3DHOME%3AKunal22sh%40gmail.com%0AURL%3Ahttps%3A%2F%2Fwww.linkedin.com%2Fin%2Fkunal-sharma-pm%2F%0AEND%3AVCARD" download="Kunal_Sharma.vcf">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v14a2 2 0 0 1-2 2z"/>
+      <polyline points="17 21 17 13 7 13 7 21"/>
+      <polyline points="7 3 7 8 15 8"/>
+    </svg>
+    Save Contact
+  </a>
+
+  <div class="footer">Kunal Sharma &middot; Jio Platforms &middot; 2025</div>
+</div>
+
+<!-- WhatsApp Modal -->
+<div class="modal-overlay" id="modalOverlay" onclick="handleOverlayClick(event)">
+  <div class="modal" id="modal">
+    <div class="modal-handle"></div>
+    <div class="modal-top-rule"></div>
+    <div class="modal-title">Quick intro</div>
+    <div class="modal-sub">Takes 5 seconds — so Kunal knows who's reaching out.</div>
+
+    <div class="field">
+      <div class="field-header">
+        <label>Your name <span class="required-star">*</span></label>
+      </div>
+      <input type="text" id="inputName" placeholder="e.g. Ravi" oninput="updatePreview()" autocomplete="given-name">
+    </div>
+
+    <div class="field">
+      <div class="field-header">
+        <label>Organisation</label>
+        <span class="optional-tag">Optional</span>
+      </div>
+      <input type="text" id="inputOrg" placeholder="e.g. Google, Sequoia…" oninput="updatePreview()" autocomplete="organization">
+    </div>
+
+    <div class="preview-wrap" id="previewWrap">
+      <div class="preview-label">Message preview</div>
+      <div class="preview-bubble" id="previewBubble"></div>
+    </div>
+
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeModal()">Cancel</button>
+      <button class="btn-send" id="btnSend" onclick="sendWhatsApp()" disabled>
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/>
+        </svg>
+        Open WhatsApp
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  function buildMessage(name, org) {
+    const orgPart = org.trim() ? `, from ${org.trim()}` : '';
+    return `Hi Kunal, this is ${name.trim()}${orgPart}. I came across your card and wanted to say hi — would love to connect and have a conversation!`;
+  }
+
+  function updatePreview() {
+    const name   = document.getElementById('inputName').value.trim();
+    const org    = document.getElementById('inputOrg').value.trim();
+    const btn    = document.getElementById('btnSend');
+    const wrap   = document.getElementById('previewWrap');
+    const bubble = document.getElementById('previewBubble');
+
+    if (name) {
+      btn.disabled = false;
+      wrap.classList.add('visible');
+      bubble.textContent = buildMessage(name, org);
+    } else {
+      btn.disabled = true;
+      wrap.classList.remove('visible');
+    }
+  }
+
+  function openModal() {
+    document.getElementById('modalOverlay').classList.add('open');
+    setTimeout(() => document.getElementById('inputName').focus(), 400);
+  }
+
+  function closeModal() {
+    document.getElementById('modalOverlay').classList.remove('open');
+  }
+
+  function handleOverlayClick(e) {
+    if (e.target === document.getElementById('modalOverlay')) closeModal();
+  }
+
+  function sendWhatsApp() {
+    const name = document.getElementById('inputName').value.trim();
+    const org  = document.getElementById('inputOrg').value.trim();
+    if (!name) return;
+    const msg = buildMessage(name, org);
+    window.open('https://wa.me/917021833799?text=' + encodeURIComponent(msg), '_blank');
+    closeModal();
+  }
+
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+</script>
+</body>
+</html>
